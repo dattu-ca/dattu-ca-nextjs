@@ -1,7 +1,3 @@
-
-
-
-
 import React from "react";
 import Head from "next/head";
 import { ThemeProvider } from "@mui/material/styles";
@@ -21,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <React.Fragment>
       <Head>
-        <title>Next.js Blog Example with {WEBSITE_NAME}</title>
+        <title>{WEBSITE_NAME}</title>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

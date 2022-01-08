@@ -1,25 +1,49 @@
+import { useCallback } from "react";
 import PropTypes from "prop-types";
+import Link from "../../src/Link";
+import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
 
+const MyPagination = ({ skip, limit, total, urls }) => {
+  const currentPage = skip / limit + 1;
 
-const Pagination = ({ skip, limit, total, currentPage, urls }) => {
-    return <div>
-        <p>Skip: {skip}</p>
-        <p>limit: {limit}</p>
-        <p>total: {total}</p>
-        <p>currentPage: {currentPage}</p>
-        <pre>{JSON.stringify(urls, null, 2)}</pre>
-    </div>
+  const pages = Math.ceil(total / limit);
+
+  const getLink = useCallback(
+    (page) => {
+      const { first, pages, param } = urls;
+      if (page === 1 && first !== null && typeof first !== "undefined") {
+        return first;
+      }
+      return pages.replace(param, page.toString());
+    },
+    [urls]
+  );
+
+  return (
+    <Pagination
+      count={pages}
+      page={currentPage}
+      siblingCount={1}
+      renderItem={(item, i) => (
+        <PaginationItem component={Link} href={getLink(item.page)} {...item}>
+          {item.page}
+        </PaginationItem>
+      )}
+    />
+  );
 };
 
-Pagination.propTypes ={
-    skip: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    currentPage: PropTypes.number,
-    urls: PropTypes.shape({
-        zero: PropTypes.string,
-        pages: PropTypes.string.isRequired
-    }).isRequired
-}
+MyPagination.propTypes = {
+  skip: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  currentPage: PropTypes.number,
+  urls: PropTypes.shape({
+    first: PropTypes.string,
+    pages: PropTypes.string.isRequired,
+    param: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
-export default Pagination;
+export default MyPagination;

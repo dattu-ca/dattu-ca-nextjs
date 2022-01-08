@@ -25,7 +25,7 @@ export async function getStaticProps({params}) {
   const metadata = await getMetaData();
   const totalPosts = await getTotalPosts();
   
-  const currentPage = params.currentPage;
+  const currentPage = parseInt(params.currentPage);
   const limit = metadata.numberOfPostsPerPage;
   const skip = (currentPage - 1) * limit;
 
@@ -39,9 +39,8 @@ export async function getStaticProps({params}) {
         skip: skip,
         limit: limit,
         total: totalPosts,
-        currentPage: currentPage,
         urls: {
-          zero: "/",
+          first: "/",
           pages: "/home/[currentPage]",
           param: "[currentPage]",
         },

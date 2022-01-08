@@ -1,5 +1,5 @@
 import { createClient } from "contentful";
-import {POSTS} from './constants';
+import {POSTS} from './content.queries';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,

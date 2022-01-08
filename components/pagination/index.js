@@ -25,7 +25,7 @@ const MyPagination = ({ skip, limit, total, urls }) => {
       count={pages}
       page={currentPage}
       siblingCount={1}
-      renderItem={(item, i) => (
+      renderItem={(item) => (
         <PaginationItem component={Link} href={getLink(item.page)} {...item}>
           {item.page}
         </PaginationItem>

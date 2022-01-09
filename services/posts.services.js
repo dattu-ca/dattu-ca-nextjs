@@ -7,7 +7,6 @@ const client = createClient({
 });
 
 
-
 export const getTotalPosts = async () => {
   const res = await client.getEntries({
     ...POSTS
@@ -30,3 +29,16 @@ export const getAllPostsForHome = async (skip = 0, limit = 10) => {
   const res = await client.getEntries(query);
   return res.items || [];
 };
+
+
+export const getTotalPostsByMeta = async (meta) => {
+  const query = {
+    ...POSTS
+  };
+
+
+  
+
+  const res = await client.getEntries(query);
+  return (res.items || []).length;
+}

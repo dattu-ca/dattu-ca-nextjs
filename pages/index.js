@@ -2,13 +2,13 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { getTotalPosts, getAllPostsForHome } from "../services/posts.services";
-import { getMetaData } from "../services/metadata.services";
+import { getWebsiteMetaData } from "../services/websiteMetadata.services";
 
 import PostBlurb from "../components/posts/posts.blurb";
 import Pagination from "../components/pagination";
 
 export async function getStaticProps() {
-  const metadata = await getMetaData();
+  const metadata = await getWebsiteMetaData();
   const totalPosts = await getTotalPosts();
   
   const limit = metadata.numberOfPostsPerPage;

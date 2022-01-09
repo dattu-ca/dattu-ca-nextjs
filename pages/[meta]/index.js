@@ -1,7 +1,9 @@
 import _ from "lodash";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+
 import { getAllMetas } from "../../services/meta.services";
+import MetasList from "../../components/metas/metas.list";
 
 export async function getStaticPaths() {
   const metas = ["categories", "tags", "activities"];
@@ -17,21 +19,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const metas = await getAllMetas(params.meta);
+  const items = await getAllMetas(params.meta);
   return {
     props: {
       metaType: params.meta,
-      metas: metas,
+      items: items,
     },
   };
 }
 
-export default function Index({ metaType, metas }) {
+export default function Index({ metaType, items }) {
   return (
     <Container maxWidth="sm">
       <h1>{_.startCase(_.toLower(metaType))}</h1>
       <Box sx={{ my: 4 }}>
-        <pre>{JSON.stringify(metas, null, 2)}</pre>
+        <MetasList items={items} />
       </Box>
     </Container>
   );

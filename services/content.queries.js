@@ -1,6 +1,6 @@
 const content_type = "content_type";
 
-export const METADATA = {
+export const WEBSITE_METADATA = {
   content_type: "websiteMetadata",
 };
 

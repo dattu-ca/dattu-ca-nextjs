@@ -1,20 +1,20 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { getTotalPosts, getAllPostsForHome } from "../services/posts.services";
-import { getWebsiteMetaData } from "../services/websiteMetadata.services";
+import { retrievePostsTotal, retrievePostsList } from "../services/posts.services";
+import { retrieveWebsiteMetaData } from "../services/websiteMetadata.services";
 
 import PostBlurb from "../components/posts/posts.blurb";
 import Pagination from "../components/pagination";
 
 export async function getStaticProps() {
-  const metadata = await getWebsiteMetaData();
-  const totalPosts = await getTotalPosts();
+  const metadata = await retrieveWebsiteMetaData();
+  const totalPosts = await retrievePostsTotal();
   
   const limit = metadata.numberOfPostsPerPage;
   const skip = 0;
 
-  const posts = await getAllPostsForHome(skip, limit);
+  const posts = await retrievePostsList(skip, limit);
 
   return {
     props: {

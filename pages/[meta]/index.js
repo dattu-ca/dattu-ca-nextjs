@@ -2,11 +2,13 @@ import _ from "lodash";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import { getAllMetas } from "../../services/meta.services";
+import { META_TYPES } from "../../services/meta.constants";
+import { retrieveMetasList } from "../../services/meta.services";
+
 import MetasList from "../../components/metas/metas.list";
 
 export async function getStaticPaths() {
-  const metas = ["categories", "tags", "activities"];
+  const metas = Object.values(META_TYPES);
   const paths = metas.map((m) => ({
     params: {
       meta: m,
@@ -19,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const items = await getAllMetas(params.meta);
+  const items = await retrieveMetasList(params.meta);
   return {
     props: {
       metaType: params.meta,

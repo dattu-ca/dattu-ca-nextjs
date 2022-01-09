@@ -2,7 +2,7 @@ import cache from "memory-cache";
 import { client } from "./client";
 import { WEBSITE_METADATA } from "./content.queries";
 
-export const getWebsiteMetaData = async (bypassCache = false) => {
+export const retrieveWebsiteMetaData = async (bypassCache = false) => {
   const cachedResponse = cache.get(WEBSITE_METADATA);
   if (cachedResponse && !bypassCache) {
     return cachedResponse;

@@ -10,7 +10,6 @@ export const POSTS = {
   order: "-fields.publishDate",
 };
 
-// #region Metas
 export const CATEGORIES = {
   content_type: "metaCategory",
   order: "fields.title",
@@ -23,20 +22,3 @@ export const ACTIVITIES = {
   content_type: "metaActivityType",
   order: "fields.title",
 };
-
-export const getMetaQuery = (meta) => {
-  let c = undefined;
-  switch (meta) {
-    case "tags":
-      c = TAGS;
-      break;
-    case "activities":
-      c = ACTIVITIES;
-      break;
-    default:
-      c = CATEGORIES;
-      break;
-  }
-  return c;
-};
-// #endregion

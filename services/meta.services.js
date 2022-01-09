@@ -1,5 +1,22 @@
 import { createClient } from "contentful";
-import { getMetaQuery } from "./content.queries";
+import { META_TYPES } from "./meta.constants";
+import { CATEGORIES, TAGS, ACTIVITIES } from "./content.queries";
+
+const getMetaQuery = (meta) => {
+  let c = undefined;
+  switch (meta) {
+    case META_TYPES.TAGS:
+      c = TAGS;
+      break;
+    case META_TYPES.ACTIVITIES:
+      c = ACTIVITIES;
+      break;
+    default:
+      c = CATEGORIES;
+      break;
+  }
+  return c;
+};
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -10,17 +27,19 @@ const processItems = (items) => {
   const newItems = [];
   items.forEach((item) => {
     const slug = item.fields.slug;
-    const isChild = items.filter((item) =>
-      item.fields.children?.filter((child) => child.fields.slug === slug).length > 0
+    const isChild = items.filter(
+      (item) =>
+        item.fields.children?.filter((child) => child.fields.slug === slug)
+          .length > 0
     ).length;
-    if(!isChild){
-        newItems.push(item)
+    if (!isChild) {
+      newItems.push(item);
     }
   });
   return newItems;
 };
 
-export const getAllMetas = async (meta) => {
+export const retrieveMetasList = async (meta) => {
   const query = {
     ...getMetaQuery(meta),
   };

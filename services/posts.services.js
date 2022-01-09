@@ -7,14 +7,14 @@ const client = createClient({
 });
 
 
-export const getTotalPosts = async () => {
+export const retrievePostsTotal = async () => {
   const res = await client.getEntries({
     ...POSTS
   });
   return (res.items || []).length;
 };
 
-export const getAllPostsForHome = async (skip = 0, limit = 10) => {
+export const retrievePostsList = async (skip = 0, limit = 10) => {
   const query = {
     ...POSTS
   };
@@ -29,16 +29,3 @@ export const getAllPostsForHome = async (skip = 0, limit = 10) => {
   const res = await client.getEntries(query);
   return res.items || [];
 };
-
-
-export const getTotalPostsByMeta = async (meta) => {
-  const query = {
-    ...POSTS
-  };
-
-
-  
-
-  const res = await client.getEntries(query);
-  return (res.items || []).length;
-}

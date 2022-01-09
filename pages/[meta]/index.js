@@ -5,7 +5,6 @@ import { getAllMetas } from "../../services/meta.services";
 
 export async function getStaticPaths() {
   const metas = ["categories", "tags", "activities"];
-
   const paths = metas.map((m) => ({
     params: {
       meta: m,

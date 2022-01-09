@@ -1,5 +1,5 @@
 import { createClient } from "contentful";
-import {POSTS} from './content.queries';
+import {ALL_POSTS} from './content.queries';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -9,7 +9,7 @@ const client = createClient({
 
 export const retrievePostsTotal = async (postType) => {
   const query = {
-    ...POSTS
+    ...ALL_POSTS
   };
   if(postType){
     query["fields.postType"] = postType;
@@ -21,7 +21,7 @@ export const retrievePostsTotal = async (postType) => {
 
 export const retrievePostsList = async (postType, skip = 0, limit = 10) => {
   const query = {
-    ...POSTS
+    ...ALL_POSTS
   };
 
   if(postType){

@@ -1,23 +1,22 @@
-const content_type = "content_type";
-
-export const WEBSITE_METADATA = {
+export const WEBSITE_METADATA = Object.freeze({
   content_type: "websiteMetadata",
-};
+});
 
-export const POSTS = {
+export const ALL_POSTS = Object.freeze({
   content_type: "blogPost",
   order: "-fields.publishDate",
-};
+});
 
-export const CATEGORIES = {
+export const CATEGORIES = Object.freeze({
   content_type: "metaCategory",
   order: "fields.title",
-};
-export const TAGS = {
+});
+export const TAGS = Object.freeze({
   content_type: "metaTag",
   order: "fields.title",
-};
-export const ACTIVITIES = {
+});
+
+export const ACTIVITIES = Object.freeze({
   content_type: "metaActivityType",
   order: "fields.title",
-};
+});

@@ -2,7 +2,7 @@ import _ from "lodash";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import { META_TYPES } from "../../services/meta.constants";
+import { META_TYPES } from "../../services/constants";
 import { retrieveMetasList } from "../../services/meta.services";
 
 import MetasList from "../../components/metas/metas.list";

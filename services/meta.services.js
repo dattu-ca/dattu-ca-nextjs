@@ -1,5 +1,5 @@
 import { createClient } from "contentful";
-import { META_TYPES } from "./meta.constants";
+import { META_TYPES } from "./constants";
 import { CATEGORIES, TAGS, ACTIVITIES } from "./content.queries";
 
 const getMetaQuery = (meta) => {

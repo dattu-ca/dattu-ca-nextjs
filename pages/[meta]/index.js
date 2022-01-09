@@ -1,4 +1,4 @@
-import * as _ from "lodash";
+import _ from "lodash";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { getAllMetas } from "../../services/meta.services";

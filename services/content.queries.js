@@ -6,7 +6,6 @@ export const WEBSITE_METADATA = {
 
 export const POSTS = {
   content_type: "blogPost",
-  "fields.postType": "Post",
   order: "-fields.publishDate",
 };
 

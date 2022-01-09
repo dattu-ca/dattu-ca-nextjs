@@ -1,13 +1,13 @@
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import { POST_TYPES } from "../../services/constants";
+import { POST_TYPES, POST_PAGES_URLS } from "../../services/constants";
 import {
   retrievePostsTotal,
   retrievePostsList,
 } from "../../services/posts.services";
 import { retrieveWebsiteMetaData } from "../../services/websiteMetadata.services";
-import { getPaginationPaths } from "../../services/utils";
+import { calculatePaginatedPaths } from "../../services/utils";
 
 import PostBlurb from "../../components/posts/posts.blurb";
 import Pagination from "../../components/pagination";
@@ -15,7 +15,7 @@ import Pagination from "../../components/pagination";
 export async function getStaticPaths() {
   const metadata = await retrieveWebsiteMetaData();
   const totalPosts = await retrievePostsTotal(POST_TYPES.POST);
-  const paths = getPaginationPaths(totalPosts, metadata.numberOfPostsPerPage);
+  const paths = calculatePaginatedPaths(totalPosts, metadata.numberOfPostsPerPage);
   return {
     paths,
     fallback: false,
@@ -39,11 +39,7 @@ export async function getStaticProps({ params }) {
         skip: skip,
         limit: limit,
         total: totalPosts,
-        urls: {
-          first: "/",
-          pages: "/home/[currentPage]",
-          param: "[currentPage]",
-        },
+        urls: POST_PAGES_URLS,
       },
     },
   };

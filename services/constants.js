@@ -1,11 +1,17 @@
-export const META_TYPES = {
+export const META_TYPES = Object.freeze({
   CATEGORIES: "categories",
   TAGS: "tags",
   ACTIVITIES: "activities",
-};
+});
 
-export const POST_TYPES = {
+export const POST_TYPES = Object.freeze({
   POST: "Post",
   ACTIVITY_POST: "Activity Post",
-  ALL: false
-}
+  ALL: false,
+});
+
+export const POST_PAGES_URLS = Object.freeze({
+  first: "/",
+  pages: "/home/[currentPage]",
+  param: "[currentPage]",
+});

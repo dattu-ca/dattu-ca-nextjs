@@ -2,7 +2,7 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import { POST_TYPES } from "../services/constants";
+import { POST_TYPES, POST_PAGES_URLS } from "../services/constants";
 import {
   retrievePostsTotal,
   retrievePostsList,
@@ -28,11 +28,7 @@ export async function getStaticProps() {
         skip: skip,
         limit: limit,
         total: totalPosts,
-        urls: {
-          first: "/",
-          pages: "/home/[currentPage]",
-          param: "[currentPage]",
-        },
+        urls: POST_PAGES_URLS,
       },
     },
   };

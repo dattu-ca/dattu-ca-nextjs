@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import PostBlurb from "./posts.blurb";
-import Pagination from "../pagination";
+import Pagination from "../pagination/pagination.container";
 
 const PostsListContainer = ({ posts, pagination }) => {
   return (

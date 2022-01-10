@@ -7,8 +7,8 @@ export async function getStaticPaths() {
   return await retrieveStaticPaths();
 }
 
-export async function getStaticProps({ params }) {
-  return await retrieveStaticProps(parseInt(params.currentPage));
+export async function getStaticProps(props) {
+  return await retrieveStaticProps(props);
 }
 
 export default function Index({ posts, pagination }) {

@@ -3,8 +3,9 @@ import { client } from "./client";
 import { WEBSITE_METADATA } from "./content.queries";
 
 export const retrieveWebsiteMetaData = async (bypassCache = false) => {
+  const enableCache = process.env.ENABLE_CACHE === 'true';
   const cachedResponse = cache.get(WEBSITE_METADATA);
-  if (cachedResponse && !bypassCache) {
+  if (cachedResponse && !bypassCache && enableCache) {
     return cachedResponse;
   }
 

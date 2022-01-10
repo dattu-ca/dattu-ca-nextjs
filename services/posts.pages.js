@@ -1,8 +1,7 @@
 import { retrieveWebsiteMetaData } from "./websiteMetadata.services";
 import { retrievePostsTotal, retrievePostsList } from "./posts.services";
-import {calculatePaginatedPaths} from './utils';
-
-import { POST_TYPES, POST_PAGES_URLS } from "./constants";
+import { calculatePaginatedPaths } from "./utils";
+import { POST_TYPES } from "./constants";
 
 export const retrieveStaticPaths = async () => {
   const metadata = await retrieveWebsiteMetaData();
@@ -17,7 +16,12 @@ export const retrieveStaticPaths = async () => {
   };
 };
 
-export const retrieveStaticProps = async (currentPage) => {
+export const retrieveStaticProps = async (props) => {
+  if (props === undefined || props === null) {
+    props = { params: { currentPage: 1 } };
+  }
+  const { params } = props;
+  const { currentPage } = params;
   const metadata = await retrieveWebsiteMetaData();
   const totalPosts = await retrievePostsTotal(POST_TYPES.POST);
 
@@ -33,7 +37,11 @@ export const retrieveStaticProps = async (currentPage) => {
         skip: skip,
         limit: limit,
         total: totalPosts,
-        urls: POST_PAGES_URLS,
+        urls: {
+          first: "/",
+          pages: "/home/[currentPage]",
+          param: "[currentPage]",
+        },
       },
     },
   };

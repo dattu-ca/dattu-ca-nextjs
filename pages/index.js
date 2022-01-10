@@ -5,7 +5,7 @@ import { retrieveStaticProps } from "../services/posts.pages";
 import PostsListContainer from "../components/posts/posts.list.container";
 
 export async function getStaticProps() {
-  return await retrieveStaticProps(1);
+  return await retrieveStaticProps();
 }
 
 export default function Index({ posts, pagination }) {

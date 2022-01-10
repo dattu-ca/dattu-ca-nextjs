@@ -11,8 +11,8 @@ export async function getStaticPaths() {
   return await retrieveStaticPaths();
 }
 
-export async function getStaticProps({ params }) {
-  return await retrieveStaticProps(params.meta);
+export async function getStaticProps(props) {
+  return await retrieveStaticProps(props);
 }
 
 export default function Index({ metaType, items }) {

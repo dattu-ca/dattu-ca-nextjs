@@ -2,6 +2,8 @@ export const META_TYPES = Object.freeze({
   CATEGORIES: "categories",
   TAGS: "tags",
   ACTIVITIES: "activities",
+  PERSON: "person",
+  PLACE: "place"
 });
 
 export const POST_TYPES = Object.freeze({

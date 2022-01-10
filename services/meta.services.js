@@ -1,6 +1,8 @@
 import { createClient } from "contentful";
-import { META_TYPES } from "./constants";
-import { CATEGORIES, TAGS, ACTIVITIES } from "./content.queries";
+import { META_TYPES, POST_TYPES } from "./constants";
+import { CATEGORIES, TAGS, ACTIVITIES, PLACE, PERSON } from "./content.queries";
+
+import { retrievePostsList } from "./posts.services";
 
 const getMetaQuery = (meta) => {
   let c = undefined;
@@ -10,6 +12,12 @@ const getMetaQuery = (meta) => {
       break;
     case META_TYPES.ACTIVITIES:
       c = ACTIVITIES;
+      break;
+    case META_TYPES.PERSON:
+      c = PERSON;
+      break;
+    case META_TYPES.PLACE:
+      c = PLACE;
       break;
     default:
       c = CATEGORIES;
@@ -39,11 +47,17 @@ const processItems = (items) => {
   return newItems;
 };
 
-export const retrieveMetasList = async (meta) => {
+export const retrieveMetasList = async (meta, includeTotalPosts = true) => {
   const query = {
     ...getMetaQuery(meta),
   };
 
   const res = await client.getEntries(query);
-  return processItems(res.items || []);
+  const processedItems = processItems(res.items || []);
+
+  if (includeTotalPosts) {
+    const posts = await retrievePostsList(POST_TYPES.ALL);
+  }
+
+  return processedItems;
 };

@@ -20,3 +20,13 @@ export const ACTIVITIES = Object.freeze({
   content_type: "metaActivityType",
   order: "fields.title",
 });
+
+export const PLACE = Object.freeze({
+  content_type: "metaPlace",
+  order: "fields.title",
+});
+
+export const PERSON = Object.freeze({
+  content_type: "person",
+  order: "fields.title",
+});

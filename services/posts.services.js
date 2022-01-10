@@ -19,7 +19,7 @@ export const retrievePostsTotal = async (postType) => {
   return (res.items || []).length;
 };
 
-export const retrievePostsList = async (postType, skip = 0, limit = 10) => {
+export const retrievePostsList = async (postType, skip, limit) => {
   const query = {
     ...ALL_POSTS
   };

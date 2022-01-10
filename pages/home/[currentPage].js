@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 
 import { retrieveStaticProps, retrieveStaticPaths } from "../../services/posts.page";
-import PostsList from "../../components/posts/posts.list";
+import PostsListContainer from "../../components/posts/posts.list";
 
 export async function getStaticPaths() {
   return await retrieveStaticPaths();
@@ -14,7 +14,7 @@ export async function getStaticProps({ params }) {
 export default function Index({ posts, pagination }) {
   return (
     <Container maxWidth="sm">
-      <PostsList posts={posts} pagination={pagination} />
+      <PostsListContainer posts={posts} pagination={pagination} />
     </Container>
   );
 }

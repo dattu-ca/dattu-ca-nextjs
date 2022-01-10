@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import PostBlurb from "./posts.blurb";
 import Pagination from "../pagination";
 
-const PostsList = ({ posts, pagination }) => {
+const PostsListContainer = ({ posts, pagination }) => {
   return (
     <Box sx={{ my: 4 }}>
       {posts.map((post) => (
@@ -13,4 +13,4 @@ const PostsList = ({ posts, pagination }) => {
   );
 };
 
-export default PostsList;
+export default PostsListContainer;

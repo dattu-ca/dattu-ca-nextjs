@@ -3,9 +3,9 @@ import Container from "@mui/material/Container";
 import {
   retrieveStaticPaths,
   retrieveStaticProps,
-} from "../../services/meta.page";
+} from "../../services/meta.pages";
 
-import MetasListContainer from "../../components/metas/metas.list";
+import MetasListContainer from "../../components/metas/metas.list.container";
 
 export async function getStaticPaths() {
   return await retrieveStaticPaths();

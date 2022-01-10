@@ -1,8 +1,8 @@
 import * as React from "react";
 import Container from "@mui/material/Container";
 
-import { retrieveStaticProps } from "../services/posts.page";
-import PostsListContainer from "../components/posts/posts.list";
+import { retrieveStaticProps } from "../services/posts.pages";
+import PostsListContainer from "../components/posts/posts.list.container";
 
 export async function getStaticProps() {
   return await retrieveStaticProps(1);

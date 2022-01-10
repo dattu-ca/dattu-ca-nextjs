@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 
-import { retrieveStaticProps, retrieveStaticPaths } from "../../services/posts.page";
-import PostsListContainer from "../../components/posts/posts.list";
+import { retrieveStaticProps, retrieveStaticPaths } from "../../services/posts.pages";
+import PostsListContainer from "../../components/posts/posts.list.container";
 
 export async function getStaticPaths() {
   return await retrieveStaticPaths();

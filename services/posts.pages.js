@@ -1,11 +1,11 @@
 import { retrieveWebsiteMetaData } from "./websiteMetadata.services";
 import { retrievePostsTotal, retrievePostsList } from "./posts.services";
 import { calculatePaginatedPaths } from "./utils";
-import { POST_TYPES } from "./constants";
+import { POST_VISIBILITY } from "./constants";
 
 export const retrieveStaticPaths = async () => {
   const metadata = await retrieveWebsiteMetaData();
-  const totalPosts = await retrievePostsTotal(POST_TYPES.POST);
+  const totalPosts = await retrievePostsTotal(POST_VISIBILITY.HOME_PAGE);
   const paths = calculatePaginatedPaths(
     totalPosts,
     metadata.numberOfPostsPerPage
@@ -23,12 +23,12 @@ export const retrieveStaticProps = async (props) => {
   const { params } = props;
   const { currentPage } = params;
   const metadata = await retrieveWebsiteMetaData();
-  const totalPosts = await retrievePostsTotal(POST_TYPES.POST);
+  const totalPosts = await retrievePostsTotal(POST_VISIBILITY.HOME_PAGE);
 
   const limit = metadata.numberOfPostsPerPage;
   const skip = (currentPage - 1) * limit;
 
-  const posts = await retrievePostsList(POST_TYPES.POST, skip, limit);
+  const posts = await retrievePostsList(POST_VISIBILITY.HOME_PAGE, skip, limit);
 
   return {
     props: {

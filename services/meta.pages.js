@@ -15,7 +15,6 @@ export async function retrieveStaticPaths() {
 }
 
 export async function retrieveStaticProps(props) {
-  console.log(props);
   const { params } = props;
   const { meta } = params;
   const items = await retrieveMetasList(meta);

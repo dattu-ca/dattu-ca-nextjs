@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { createClient } from "contentful";
 import { META_TYPES, POST_TYPES } from "./constants";
 import { CATEGORIES, TAGS, ACTIVITIES, PLACE, PERSON } from "./content.queries";
@@ -31,7 +32,7 @@ const client = createClient({
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
 });
 
-const processItems = (items) => {
+const familyfyItems = (items) => {
   const newItems = [];
   items.forEach((item) => {
     const slug = item.fields.slug;
@@ -47,17 +48,29 @@ const processItems = (items) => {
   return newItems;
 };
 
+const attachNumberOfPosts = (meta, items, posts) => {
+  const newItems = _.cloneDeep(items);
+  if (posts) {
+    
+    console.log(posts);
+    console.log(meta);
+  }
+
+  return newItems;
+};
+
 export const retrieveMetasList = async (meta, includeTotalPosts = true) => {
   const query = {
     ...getMetaQuery(meta),
   };
 
   const res = await client.getEntries(query);
-  const processedItems = processItems(res.items || []);
+  const posts = includeTotalPosts
+    ? await retrievePostsList(POST_TYPES.ALL)
+    : false;
+  const familiyfiedItems = familyfyItems(res.items || []);
 
-  if (includeTotalPosts) {
-    const posts = await retrievePostsList(POST_TYPES.ALL);
-  }
+  const processedItems = attachNumberOfPosts(meta, familiyfiedItems, posts);
 
   return processedItems;
 };

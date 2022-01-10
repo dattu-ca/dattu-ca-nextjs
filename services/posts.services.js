@@ -7,25 +7,25 @@ const client = createClient({
 });
 
 
-export const retrievePostsTotal = async (postType) => {
+export const retrievePostsTotal = async (postVisibility) => {
   const query = {
     ...ALL_POSTS
   };
-  if(postType){
-    query["fields.postType"] = postType;
+  if(postVisibility){
+    query["fields.contentVisibility"] = postVisibility;
   }
 
   const res = await client.getEntries(query);
   return (res.items || []).length;
 };
 
-export const retrievePostsList = async (postType, skip, limit) => {
+export const retrievePostsList = async (postVisibility, skip, limit) => {
   const query = {
     ...ALL_POSTS
   };
 
-  if(postType){
-    query["fields.postType"] = postType;
+  if(postVisibility){
+    query["fields.contentVisibility"] = postVisibility;
   }
   if (skip !== null && skip !== undefined) {
     query.skip = skip;

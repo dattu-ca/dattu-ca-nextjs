@@ -9,7 +9,14 @@ const MetasList = ({ items }) => {
         return (
           <React.Fragment key={item.fields.slug}>
             <li>
-              {item.fields.title}
+              <span>
+                {item.fields.title}
+                {item.fields.numberOfPosts && (
+                  <span>({item.fields.numberOfPosts})</span>
+                )}
+              </span>
+              <br/>
+              <pre>{JSON.stringify(item.fields.allSlugs, null, 2)}</pre>
               {item.fields.children && (
                 <MetasList items={item.fields.children} />
               )}

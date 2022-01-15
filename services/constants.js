@@ -1,3 +1,14 @@
+export const CONTENT_TYPES = Object.freeze({
+  WEBSITE_METADATA: 'websiteMetadata',
+  POST: 'blogPost',
+  CATEGORY: 'metaCategory',
+  TAG: 'metaTag',
+  ACTIVITY: 'metaActivityType',
+  PLACE: 'metaPlace',
+  PERSON: 'person'
+})
+
+
 export const META_TYPES = Object.freeze({
   CATEGORIES: "categories",
   TAGS: "tags",

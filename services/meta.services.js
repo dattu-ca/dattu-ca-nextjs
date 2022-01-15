@@ -1,6 +1,6 @@
 import _ from "lodash";
 import { createClient } from "contentful";
-import { META_TYPES, POST_TYPES } from "./constants";
+import { META_TYPES, POST_TYPES, CONTENT_TYPES } from "./constants";
 import { CATEGORIES, TAGS, ACTIVITIES, PLACE, PERSON } from "./content.queries";
 
 import { retrievePostsList } from "./posts.services";
@@ -27,6 +27,28 @@ const getMetaQuery = (meta) => {
   return c;
 };
 
+const getMetaType = (meta) => {
+  let t = undefined;
+  switch (meta) {
+    case META_TYPES.TAGS:
+      t = CONTENT_TYPES.TAG;
+      break;
+    case META_TYPES.ACTIVITIES:
+      t = CONTENT_TYPES.ACTIVITY;
+      break;
+    case META_TYPES.PERSON:
+      t = CONTENT_TYPES.PERSON;
+      break;
+    case META_TYPES.PLACE:
+      t = CONTENT_TYPES.PLACE;
+      break;
+    default:
+      t = CONTENT_TYPES.CATEGORY;
+      break;
+  }
+  return t;
+};
+
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
@@ -48,12 +70,37 @@ const familyfyItems = (items) => {
   return newItems;
 };
 
+const getAllSlugs = (item) => {
+  const slugs = [item.fields.slug];
+  if (item.fields.children) {
+    const childSlugs = item.fields.children.map((child) => getAllSlugs(child));
+    return _.uniq(slugs.concat(childSlugs).flat());
+  }
+  return slugs;
+};
+
+const attachSlugs = (item) => {
+  const slugs = getAllSlugs(item);
+  item.fields.allSlugs = slugs;
+  if (item.fields.children) {
+    item.fields.children.forEach((child) => attachSlugs(child));
+  }
+};
+
+const attachPosts = (meta, item, posts) => {
+  //numberOfPosts
+  console.log(meta);
+  console.log(item.fields.allSlugs);
+};
+
 const attachNumberOfPosts = (meta, items, posts) => {
   const newItems = _.cloneDeep(items);
   if (posts) {
-    
-    console.log(posts);
-    console.log(meta);
+    const metaType = getMetaType(meta);
+    newItems.forEach((item) => {
+      attachSlugs(item);
+      attachPosts(metaType, item, posts);
+    });
   }
 
   return newItems;
